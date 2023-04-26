@@ -148,6 +148,10 @@ dmypy.json
 # Data
 *.csv
 *.txt
+*.zip
+*.tar.gz
+*.json
+*.xml
 
 # Graph Ouputs
 *.html
