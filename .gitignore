@@ -127,3 +127,27 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# MacOS
+.DS_Store
+
+# Presentation
+*.pptx
+
+# Documents
+*.pdf
+
+# Log Files
+*.log
+
+# Model files
+*.npz
+*.pkl
+.h5
+
+# Data
+*.csv
+*.txt
+
+# Graph Ouputs
+*.html
