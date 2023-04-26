@@ -152,6 +152,11 @@ dmypy.json
 *.tar.gz
 *.json
 *.xml
-
-# Graph Ouputs
+*.yaml
+*.yml
+*.npy
+*.jpeg
+*.jpg
+*.png
+*.gif
 *.html
