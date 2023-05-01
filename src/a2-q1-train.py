@@ -114,7 +114,9 @@ def main():
     # add new layers
     model = add_new_layers(base_model, dense_units=512, activation='relu')
     # compile model
-    compile_model(model, loss='categorical_crossentropy', metrics=['accuracy'])
+    compile_model(model, loss='categorical_crossentropy', metrics=['accuracy'],
+                  learning_rate=conf.a2_q1_hyperparams.learning_rate[0], 
+                  momentum=conf.a2_q1_hyperparams.momentum[0])
     # train model
     history = train_model(model, trainX, trainY, valX, valY, batch_size=32, epochs=10,
                             model_path=conf.paths.a2_model, 
