@@ -11,15 +11,15 @@ def get_logger(name):
 
     timestamp = str(strftime("%Y%m%d_%H%M%S"))
 
-    file_handler = logging.FileHandler(f"../data/logs/{timestamp}.log")
-    file_handler.setLevel(logging.DEBUG)
-    file_handler.setFormatter(file_formatter)
+    # file_handler = logging.FileHandler(f"../data/logs/{timestamp}.log")
+    # file_handler.setLevel(logging.DEBUG)
+    # file_handler.setFormatter(file_formatter)
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.DEBUG)
     console_handler.setFormatter(console_formatter)
 
     logger = logging.getLogger(name)
-    logger.addHandler(file_handler)
+    # logger.addHandler(file_handler)
     logger.addHandler(console_handler)
     logger.setLevel(logging.INFO)
 
