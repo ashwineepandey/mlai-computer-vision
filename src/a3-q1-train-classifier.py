@@ -39,7 +39,7 @@ def load_fashion_mnist_data():
 @ut.timer
 def load_pretrained_model(pretrained_model, weights, include_top=False):
     # Load pre-trained VGG16 model without the top layer (which includes the classification layers)
-    base_model = pretrained_model(weights=weights, include_top=False, input_shape=(32, 32, 3))
+    base_model = pretrained_model(weights=weights, include_top=False, input_shape=(28, 28, 1))
     return base_model
 
 @ut.timer
@@ -119,11 +119,7 @@ def main():
     # load config
     conf = ut.load_config()
     # load data
-    trainX, trainY, testX, testY = load_fashion_mnist_data()
-    # split training data into training and validation sets
-    trainX, trainY, valX, valY = ut.split_dataset(trainX, trainY)
-    # convert image data to float32 and normalize
-    trainX, testX, valX = ut.convert_image_data(trainX, testX, valX)
+    data = ut.load_npz(f"{conf.a3.paths.fashionmnist_input_data}fashionMNIST.npz")
     # get datetime
     datetime = ut.get_current_dt()
     # load pre-trained model
@@ -137,7 +133,10 @@ def main():
                   learning_rate=conf.a3.classifier_params.learning_rate[0], 
                   momentum=conf.a3.classifier_params.momentum[0])
     # train model
-    _, history = train_model(model, trainX, trainY, valX, valY, 
+    _, history = train_model(model, data["trainX"], 
+                             data["trainY"], 
+                             data["valX"], 
+                             data["valY"], 
                         batch_size=conf.a3.classifier_params.batch_size, 
                         epochs=conf.a3.classifier_params.epochs,
                         model_path=conf.a3.paths.model, 
@@ -148,7 +147,10 @@ def main():
     # compile model
     compile_model(model, loss='categorical_crossentropy', metrics=['accuracy'])
     # train model
-    model, history = train_model(model, trainX, trainY, valX, valY, 
+    model, history = train_model(model, data["trainX"], 
+                             data["trainY"], 
+                             data["valX"], 
+                             data["valY"],  
                         batch_size=conf.a3.classifier_params.batch_size, 
                         epochs=conf.a3.classifier_params.epochs,
                         model_path=conf.a3.paths.model, 

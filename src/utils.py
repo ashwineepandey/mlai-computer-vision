@@ -92,9 +92,9 @@ def split_dataset(trainX, trainY):
     Split the training dataset into training and validation datasets.
     """
     trainX, trainY = _shuffle_data(trainX, trainY)
-    # split into 40000 and 10000
-    trainX, valX = trainX[:40000], trainX[40000:]
-    trainY, valY = trainY[:40000], trainY[40000:]
+    # split into 50000 and 10000
+    trainX, valX = trainX[:50000], trainX[50000:]
+    trainY, valY = trainY[:50000], trainY[50000:]
     return trainX, trainY, valX, valY
 
 @timer
@@ -113,9 +113,11 @@ def encode_labels(trainY, testY, valY):
     """
     One-hot encodes the labels.
     """
+    logger.info(f"Before one-hot encoding: {trainY.shape}, {testY.shape}, {valY.shape}")
     trainY = np_utils.to_categorical(trainY) # e.g. 2 -> [0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
     testY = np_utils.to_categorical(testY)
     valY = np_utils.to_categorical(valY)
+    logger.info(f"After one-hot encoding: {trainY.shape}, {testY.shape}, {valY.shape}")
     return trainY, testY, valY
 
 
