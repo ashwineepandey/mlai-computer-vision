@@ -206,8 +206,6 @@ def plot_class_distribution(labels, class_labels):
     counts = np.zeros(len(class_labels))
     for label in labels:
         counts[label] += 1
-    # # Prepare the data for the barplot
-    # data = {'Class': np.arange(num_classes), 'Number of Images': counts}
     # Create a dataframe with the labels and counts
     data = pd.DataFrame({'Label': [class_labels[label] for label in list(range(10))], 'Count': counts})
     # Plot the barplot using plotly.express
@@ -231,7 +229,7 @@ def plot_inception_score(inception_scores):
     fig = px.line(data, x='Iterations', y='Inception Score', markers=True, title='Inception Score vs Training Iterations')
     return fig
 
-
+@ut.timer
 def main():
     # load config
     conf = ut.load_config()
