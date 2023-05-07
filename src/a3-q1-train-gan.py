@@ -42,7 +42,6 @@ def create_generator():
         Dense(28 * 28 * 1, activation='tanh'),
         Reshape((28, 28, 1))
     ])
-
     return generator
 
 
@@ -58,7 +57,6 @@ def create_discriminator():
         LeakyReLU(alpha=0.2),
         Dense(1, activation='sigmoid')
     ])
-
     return discriminator
 
 
@@ -182,7 +180,7 @@ def make_prediction(classifier, images: np.ndarray):
 
 
 @ut.timer
-def inception_score(pred, num_classes: int, eps: float = 1e-16) -> Tuple[float, float]:
+def inception_score(pred, num_classes: int, eps: float = 1e-16) -> float:
     # Compute the KL divergence for each image
     kl = pred * (np.log(pred + eps) - np.log(1.0 / num_classes))
     # Compute the average KL divergence
